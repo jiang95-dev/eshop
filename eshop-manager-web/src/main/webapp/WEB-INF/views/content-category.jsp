@@ -86,14 +86,19 @@ function menuHandler(item){
 	}else if(item.name === "rename"){
 		tree.tree('beginEdit',node.target);
 	}else if(item.name === "delete"){
-		$.messager.confirm('确认','确定删除名为 '+node.text+' 的分类吗？',function(r){
-			if(r){//如果是true 表示要执行以下的逻辑
-				$.post("/content/category/delete/",{id:node.id},function(){
-					//后台删除成功后，删除前端的节点
-					tree.tree("remove",node.target);
-				});	
-			}
-		});
+		if(node.children != null){
+			$.messager.alert('提示', '不能删除大类!');
+		}else{
+			$.messager.confirm('确认','确定删除名为 '+node.text+' 的分类吗？',function(r){
+				if(r){//如果是true 表示要执行以下的逻辑
+					var parent = tree.tree('getParent', node.target);
+					$.post("/content/category/delete/",{id:node.id, parentId:parent.id},function(){
+						//后台删除成功后，删除前端的节点
+						tree.tree("remove",node.target);
+					});	
+				}
+			});
+		}
 	}
 }
 </script>

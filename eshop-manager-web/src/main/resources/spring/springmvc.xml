@@ -18,6 +18,9 @@
 	<context:component-scan base-package="com.jjt.manager.controller" />
 
 	<mvc:annotation-driven />
+	<!-- avoid resources being intercepted by the url mapping -->
+	<mvc:resources location="/WEB-INF/js/" mapping="/js/**"/>
+	<mvc:resources location="/WEB-INF/css/" mapping="/css/**"/>
 
 	<!-- view resolver -->
 	<bean
@@ -30,8 +33,8 @@
 	<dubbo:registry address="zookeeper://127.0.0.1:2181" />
 	<dubbo:protocol name="dubbo" port="20881"/>
 
-	<dubbo:reference check="false" interface="com.jjt.manager.service.TestService" id="TestService" timeout="10000" />
+	<dubbo:reference check="false" interface="com.jjt.manager.service.ItemService" id="ItemService" timeout="100000" />
+	<dubbo:reference check="false" interface="com.jjt.manager.service.ItemCatService" id="ItemCatService" timeout="100000" />
+	<dubbo:reference check="false" interface="com.jjt.content.service.ContentCatService" id="ContentCatService" timeout="100000" />
 
-	<!-- <dubbo:reference interface="com.taotao.manager.service.ItemCatService" -->
-	<!-- id="itemCatService" timeout="1000000" /> -->
 </beans>

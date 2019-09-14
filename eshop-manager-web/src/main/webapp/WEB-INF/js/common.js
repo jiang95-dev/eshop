@@ -137,7 +137,7 @@ var TT = TAOTAO = {
     			    	//在当前的窗口中的ul标签下创建一课树
     			    	$("ul",_win).tree({
     			    		//异步发送请求 从服务端获取数据的URL
-    			    		url:'/item/cat/list',
+    			    		url:'/item-cat/list',
     			    		animate:true,
     			    		onClick : function(node){
     			    			if($(this).tree("isLeaf",node.target)){
